@@ -1,0 +1,1982 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>臺中舊城時光壁｜1908–1938 鏤空圖徽互動解謎與時光圖鑑</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Noto Serif TC & Noto Sans TC -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700;900&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            corten: {
+              dark: '#23130e',
+              deep: '#361d14',
+              rust: '#5c2d1d',
+              warm: '#7c3f28',
+              light: '#a45838',
+            },
+            brass: {
+              light: '#f3e1b9',
+              DEFAULT: '#d4a359',
+              dark: '#9c6e2b',
+            },
+            parchment: {
+              DEFAULT: '#fbf6ec',
+              dark: '#f0e5d1',
+              ink: '#2d1c14',
+            }
+          },
+          fontFamily: {
+            serif: ['"Noto Serif TC"', 'serif'],
+            sans: ['"Noto Sans TC"', '"Inter"', 'sans-serif'],
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    /* 耐候鋼鏽蝕質感背景與微粒紋理 */
+    body {
+      background-color: #23130e;
+      background-image: 
+        radial-gradient(circle at 20% 15%, rgba(164, 88, 56, 0.22) 0%, transparent 45%),
+        radial-gradient(circle at 85% 75%, rgba(124, 63, 40, 0.25) 0%, transparent 50%),
+        linear-gradient(155deg, #2a160f 0%, #3d2016 48%, #22120d 100%);
+      color: #fbf6ec;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* 耐候鋼金屬刷紋疊加 */
+    .corten-texture {
+      background-image: repeating-linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.015) 0px,
+        rgba(255, 255, 255, 0.015) 1px,
+        transparent 1px,
+        transparent 6px
+      );
+    }
+
+    /* 現場耐候鋼斜切接縫裝飾 */
+    .corten-seam {
+      position: relative;
+    }
+    .corten-seam::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(212, 163, 89, 0.45), transparent);
+    }
+
+    /* 鏤空圓徽發光與深邃牆面透視感 */
+    .medallion-disc {
+      background: radial-gradient(circle at 32% 28%, #8f492e 0%, #5e2c1b 55%, #3a1a10 100%);
+      box-shadow:
+        inset 0 2px 4px rgba(255, 220, 185, 0.25),
+        inset 0 -4px 8px rgba(15, 6, 3, 0.75),
+        0 8px 18px rgba(0, 0, 0, 0.55);
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+    }
+
+    .group:hover .medallion-disc {
+      transform: translateY(-4px) scale(1.03);
+      box-shadow:
+        inset 0 2px 6px rgba(255, 225, 190, 0.38),
+        inset 0 -4px 8px rgba(15, 6, 3, 0.8),
+        0 14px 26px rgba(0, 0, 0, 0.7),
+        0 0 18px rgba(212, 163, 89, 0.28);
+    }
+
+    /* 鏤空透光背景（模擬鋼板後方陽光/混凝土牆） */
+    .cutout-backing {
+      background: radial-gradient(circle at 50% 45%, #f5ebd6 0%, #d8c8ae 70%, #b5a387 100%);
+    }
+
+    /* 自訂捲軸 */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #23130e;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #7c3f28;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #d4a359;
+    }
+
+    /* 動畫 */
+    @keyframes fadeSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .animate-fade-up {
+      animation: fadeSlideUp 0.4s ease-out forwards;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(212, 163, 89, 0.4); }
+      50% { box-shadow: 0 0 0 8px rgba(212, 163, 89, 0); }
+    }
+    .pulse-brass {
+      animation: pulseGlow 2.4s infinite;
+    }
+  </style>
+</head>
+<body class="corten-texture font-sans antialiased selection:bg-brass selection:text-corten-dark">
+
+  <!-- 頂部主視覺與導覽列 -->
+  <header class="sticky top-0 z-40 bg-corten-dark/90 backdrop-blur-md border-b border-brass/30 shadow-lg">
+    <div class="max-w-6xl mx-auto px-4 py-3 sm:py-4">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+        <!-- 標題區 -->
+        <div class="flex items-center gap-3">
+          <div class="w-11 h-11 rounded-full medallion-disc border border-brass/50 flex items-center justify-center shrink-0">
+            <svg viewBox="0 0 100 100" class="w-8 h-8">
+              <circle cx="50" cy="50" r="38" fill="none" stroke="#f3e1b9" stroke-width="4" />
+              <path d="M50 12 V88 M12 50 H88" stroke="#f3e1b9" stroke-width="4" />
+              <circle cx="50" cy="50" r="14" fill="#f3e1b9" />
+            </svg>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-xs tracking-widest uppercase px-2 py-0.5 rounded bg-brass/20 text-brass-light border border-brass/30 font-semibold">1908 – 1938</span>
+              <span class="text-xs text-brass-light/80 hidden sm:inline">臺中舊城歷史建築走讀計畫</span>
+            </div>
+            <h1 class="font-serif text-lg sm:text-2xl font-bold text-parchment tracking-wide">
+              臺中舊城時光壁：<span class="text-brass">鏤空圖徽互動解謎與圖鑑</span>
+            </h1>
+          </div>
+        </div>
+
+        <!-- 三大互動模式切換頁籤 -->
+        <nav class="grid grid-cols-3 gap-1.5 sm:flex sm:gap-2 bg-corten-deep/90 p-1.5 rounded-xl border border-brass/25">
+          <button id="tab-gallery" onclick="switchMode('gallery')"
+            class="tab-btn px-3 py-2 rounded-lg text-xs sm:text-sm font-bold transition-all flex items-center justify-center gap-1.5 bg-brass text-corten-dark shadow">
+            <span>🏛️</span><span>時光圖鑑</span>
+          </button>
+          <button id="tab-quest" onclick="switchMode('quest')"
+            class="tab-btn px-3 py-2 rounded-lg text-xs sm:text-sm font-bold transition-all flex items-center justify-center gap-1.5 text-parchment/80 hover:text-parchment hover:bg-corten-rust/50">
+            <span>🧭</span><span>尋寶解謎</span>
+            <span id="quest-badge" class="ml-0.5 text-[11px] px-1.5 py-0.2 rounded-full bg-corten-dark/60 text-brass-light">0/14</span>
+          </button>
+          <button id="tab-quiz" onclick="switchMode('quiz')"
+            class="tab-btn px-3 py-2 rounded-lg text-xs sm:text-sm font-bold transition-all flex items-center justify-center gap-1.5 text-parchment/80 hover:text-parchment hover:bg-corten-rust/50">
+            <span>⚡</span><span>圖徽挑戰</span>
+          </button>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- 全域提示訊息條 (取代 alert) -->
+  <div id="toast-container" class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 pointer-events-none transition-all duration-300 opacity-0 translate-y-4">
+    <div id="toast-box" class="px-5 py-3 rounded-2xl bg-parchment text-parchment-ink border-2 border-brass shadow-2xl font-bold text-sm flex items-center gap-2.5">
+      <span id="toast-icon">✨</span>
+      <span id="toast-msg">提示訊息</span>
+    </div>
+  </div>
+
+  <!-- 主內容容器 -->
+  <main class="max-w-6xl mx-auto px-4 py-6 sm:py-8">
+
+    <!-- ========================================================= -->
+    <!-- 模式一：【時光圖鑑總覽】嚴格時間軸編排 (1908 → 1938)      -->
+    <!-- ========================================================= -->
+    <section id="view-gallery" class="animate-fade-up">
+      <!-- 導言、篩選與檢視切換控制列 -->
+      <div class="bg-corten-deep/85 border border-brass/30 rounded-2xl p-5 sm:p-6 mb-4 shadow-xl relative overflow-hidden">
+        <div class="hidden md:block absolute -right-10 -top-10 w-64 h-64 border border-brass/15 rotate-12 pointer-events-none"></div>
+        
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4">
+          <div>
+            <div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-brass/20 border border-brass/40 text-brass-light text-xs font-bold mb-2">
+              <span>⏳</span><span>嚴格建造年份編排：1908 → 1938（14 處地標 × 17 組圓徽）</span>
+            </div>
+            <h2 class="font-serif text-xl sm:text-2xl font-bold text-parchment mb-1.5">
+              耐候鋼記憶長廊｜三十年城市建築演進史
+            </h2>
+            <p class="text-sm text-parchment/80 leading-relaxed max-w-2xl">
+              所有圓徽嚴格依循 1908 年至 1938 年建造年代先後排序；擁有「幾何徽章版」與「建築剪影版」的雙版地標（臺中州廳、臺中酒廠、合作金庫）採並列對照呈現。
+            </p>
+          </div>
+
+          <!-- 搜尋框與檢視切換 -->
+          <div class="flex flex-col sm:flex-row gap-2.5 w-full lg:w-auto">
+            <div class="relative flex-1 sm:w-64">
+              <label for="search-input" class="sr-only">搜尋地標或年份</label>
+              <input id="search-input" type="text" placeholder="搜尋年份、地標或特徵…"
+                oninput="renderGallery()"
+                class="w-full pl-9 pr-3 py-2.5 rounded-xl bg-corten-dark/90 border border-brass/40 text-sm text-parchment placeholder-parchment/45 focus:outline-none focus:border-brass" />
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-brass/80 text-sm">🔍</span>
+            </div>
+            <!-- 檢視切換按鈕：時間軸 vs 網格 -->
+            <div class="inline-flex rounded-xl bg-corten-dark/90 p-1 border border-brass/35 shrink-0 self-start sm:self-auto">
+              <button id="layout-timeline-btn" onclick="setGalleryLayout('timeline')"
+                class="px-3 py-1.5 rounded-lg text-xs font-bold bg-brass text-corten-dark transition flex items-center gap-1">
+                <span>🪜</span><span>時間軸</span>
+              </button>
+              <button id="layout-grid-btn" onclick="setGalleryLayout('grid')"
+                class="px-3 py-1.5 rounded-lg text-xs font-bold text-parchment/75 hover:text-parchment transition flex items-center gap-1">
+                <span>▦</span><span>網格</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 三大時代分期篩選按鈕 -->
+        <div class="flex flex-wrap items-center gap-2 mt-5 pt-4 border-t border-brass/20">
+          <span class="text-xs text-brass-light/80 font-semibold mr-1">時代分期：</span>
+          <button onclick="setEraFilter('all')" data-era="all"
+            class="era-btn px-3.5 py-1.5 rounded-full text-xs font-bold bg-brass text-corten-dark transition">
+            全部 (1908–1938)
+          </button>
+          <button onclick="setEraFilter('1908-1917')" data-era="1908-1917"
+            class="era-btn px-3.5 py-1.5 rounded-full text-xs font-bold bg-corten-dark/70 text-parchment/85 border border-brass/30 hover:border-brass transition">
+            1908–1917 鐵道與官廳奠基
+          </button>
+          <button onclick="setEraFilter('1921-1929')" data-era="1921-1929"
+            class="era-btn px-3.5 py-1.5 rounded-full text-xs font-bold bg-corten-dark/70 text-parchment/85 border border-brass/30 hover:border-brass transition">
+            1921–1929 商業金融與產業擴張
+          </button>
+          <button onclick="setEraFilter('1930-1938')" data-era="1930-1938"
+            class="era-btn px-3.5 py-1.5 rounded-full text-xs font-bold bg-corten-dark/70 text-parchment/85 border border-brass/30 hover:border-brass transition">
+            1930–1938 宗族文化與現代生活
+          </button>
+        </div>
+      </div>
+
+      <!-- 1908–1938 年份快速跳轉時光刻度尺 -->
+      <div class="sticky top-[74px] sm:top-[82px] z-30 bg-corten-dark/95 backdrop-blur-md border border-brass/35 rounded-2xl px-3 py-2.5 mb-6 shadow-xl">
+        <div class="flex items-center gap-2 overflow-x-auto no-scrollbar">
+          <span class="text-[11px] font-bold text-brass shrink-0 pl-1">時光刻度尺 ▸</span>
+          <div id="year-ruler" class="flex items-center gap-1.5">
+            <!-- 由 JS 動態生成 12 個年份刻度按鈕 -->
+          </div>
+        </div>
+      </div>
+
+      <!-- 圓徽時間軸／網格展示區 -->
+      <div id="gallery-container">
+        <!-- 由 JS 動態生成按時間嚴格編排的 14 處地標卡片 -->
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- 模式二：【現場尋寶解謎】依 1908 → 1938 時間軸實境闖關     -->
+    <!-- ========================================================= -->
+    <section id="view-quest" class="hidden animate-fade-up">
+      <!-- 尋寶進度儀表板 -->
+      <div class="bg-corten-deep/90 border border-brass/35 rounded-2xl p-5 sm:p-6 mb-6 shadow-xl">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+          <div>
+            <span class="text-xs font-bold tracking-wider uppercase text-brass">CHRONOLOGICAL TIME QUEST｜1908 → 1938</span>
+            <h2 class="font-serif text-xl sm:text-2xl font-bold text-parchment mt-0.5">
+              時光軸尋寶解謎：依年代演進破解 14 處歷史地標
+            </h2>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="openCertificateModal()" id="cert-btn"
+              class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-brass text-corten-dark shadow hover:bg-brass-light transition flex items-center gap-1.5">
+              <span>📜</span><span id="cert-btn-text">查看偵探證書</span>
+            </button>
+            <button onclick="resetQuestConfirm()"
+              class="px-3 py-2 rounded-xl text-xs font-semibold bg-corten-dark/80 text-parchment/70 border border-brass/25 hover:text-parchment transition"
+              title="重設闖關進度">
+              重置
+            </button>
+          </div>
+        </div>
+
+        <!-- 進度條 -->
+        <div class="w-full bg-corten-dark rounded-full h-3.5 p-0.5 border border-brass/30">
+          <div id="quest-progress-bar" class="bg-gradient-to-r from-brass-dark via-brass to-brass-light h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+        </div>
+        <div class="flex justify-between text-xs text-parchment/75 mt-2">
+          <span>已解鎖地標：<strong id="quest-solved-count" class="text-brass-light">0</strong> / 14 處</span>
+          <span id="quest-rank-label">目前階級：見習走讀旅人</span>
+        </div>
+
+        <!-- 14 關時間順序印記列 -->
+        <div class="mt-4 pt-4 border-t border-brass/20">
+          <p class="text-xs text-parchment/70 mb-2">時間軸關卡選單（依 1908 → 1938 建造年份排列，可自由點選）：</p>
+          <div id="quest-stage-pills" class="flex flex-wrap gap-1.5">
+            <!-- JS 動態生成 1~14 關按鈕 -->
+          </div>
+        </div>
+      </div>
+
+      <!-- 當前解謎關卡主舞台 -->
+      <div id="quest-stage-card" class="bg-parchment text-parchment-ink rounded-3xl border-2 border-brass shadow-2xl overflow-hidden">
+        <!-- 由 JS 動態渲染當前關卡內容 -->
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- 模式三：【圖徽辨識快問快答】時光連連看測驗                -->
+    <!-- ========================================================= -->
+    <section id="view-quiz" class="hidden animate-fade-up">
+      <div class="max-w-2xl mx-auto bg-parchment text-parchment-ink rounded-3xl border-2 border-brass shadow-2xl overflow-hidden">
+        <!-- 測驗頂部資訊列 -->
+        <div class="bg-corten-deep text-parchment px-6 py-4 flex items-center justify-between border-b border-brass/40">
+          <div>
+            <span class="text-xs text-brass uppercase tracking-wider font-bold">視覺記憶大考驗</span>
+            <h2 class="font-serif text-lg sm:text-xl font-bold">鏤空圖徽辨識快問快答</h2>
+          </div>
+          <div class="text-right">
+            <div class="text-xs text-parchment/75">目前得分</div>
+            <div class="font-serif text-xl font-black text-brass"><span id="quiz-score">0</span> <span class="text-xs font-normal text-parchment/70">/ 100</span></div>
+          </div>
+        </div>
+
+        <!-- 測驗互動區 -->
+        <div id="quiz-body" class="p-6 sm:p-8">
+          <!-- 由 JS 動態渲染題目或結算畫面 -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 頁尾資訊 -->
+  <footer class="max-w-6xl mx-auto px-4 py-8 mt-6 border-t border-brass/20 text-center text-xs text-parchment/60 space-y-1.5">
+    <p class="font-serif text-sm text-brass-light/90">臺中舊城時光壁｜1908–1938 鏤空圖徽互動解謎與時光圖鑑</p>
+    <p>依建造年份嚴格編排 14 處臺中重要歷史地標 × 17 組耐候鋼鏤空圓徽．適合實境走讀與線上互動體驗</p>
+  </footer>
+
+  <!-- ========================================================= -->
+  <!-- 彈窗一：歷史故事導覽卡 Modal                              -->
+  <!-- ========================================================= -->
+  <div id="detail-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/75 backdrop-blur-sm">
+    <div class="bg-parchment text-parchment-ink w-full max-w-2xl max-h-[90vh] rounded-3xl border-2 border-brass shadow-2xl overflow-hidden flex flex-col animate-fade-up">
+      <!-- 頂部深色標頭 -->
+      <div class="bg-corten-deep text-parchment px-6 py-4 flex items-center justify-between border-b border-brass/40 shrink-0">
+        <div class="flex items-center gap-2.5">
+          <span id="modal-year" class="px-2.5 py-0.5 rounded-lg bg-brass text-corten-dark font-serif font-black text-sm">1908</span>
+          <h3 id="modal-title" class="font-serif text-lg sm:text-xl font-bold">地標名稱</h3>
+        </div>
+        <button onclick="closeDetailModal()" class="w-9 h-9 rounded-full bg-corten-dark/70 text-parchment hover:bg-brass hover:text-corten-dark flex items-center justify-center font-bold transition">
+          ✕
+        </button>
+      </div>
+
+      <!-- 可捲動內文 -->
+      <div class="p-6 overflow-y-auto space-y-5">
+        <div class="flex flex-col sm:flex-row items-center gap-6 bg-parchment-dark/70 p-5 rounded-2xl border border-brass/30">
+          <!-- 放大版 SVG 圓徽 -->
+          <div id="modal-svg-container" class="w-40 h-40 sm:w-44 sm:h-44 rounded-full medallion-disc p-3 flex items-center justify-center shrink-0">
+          </div>
+          <div class="space-y-2 text-center sm:text-left">
+            <span id="modal-badge-type" class="inline-block text-xs font-bold px-2.5 py-1 rounded-full bg-corten-rust text-parchment">
+              建築剪影版
+            </span>
+            <h4 id="modal-subtitle" class="font-serif text-lg font-bold text-corten-deep">副標題</h4>
+            <p id="modal-design-note" class="text-sm text-parchment-ink/85 leading-relaxed">
+              設計解析說明
+            </p>
+          </div>
+        </div>
+
+        <!-- 歷史故事 -->
+        <div>
+          <h5 class="font-serif font-bold text-base text-corten-rust flex items-center gap-1.5 mb-2">
+            <span>📖</span><span>歷史背景與城市記憶</span>
+          </h5>
+          <p id="modal-history" class="text-sm sm:text-base text-parchment-ink/90 leading-relaxed">
+            歷史內容
+          </p>
+        </div>
+
+        <!-- 現場走讀小知識 -->
+        <div class="bg-amber-50/90 border-l-4 border-brass p-4 rounded-r-xl">
+          <h5 class="font-bold text-sm text-corten-deep flex items-center gap-1.5 mb-1">
+            <span>💡</span><span>現場走讀觀察小知識</span>
+          </h5>
+          <p id="modal-walk-tip" class="text-xs sm:text-sm text-parchment-ink/85 leading-relaxed">
+            走讀提示
+          </p>
+        </div>
+      </div>
+
+      <!-- 底部操作列 -->
+      <div class="px-6 py-3.5 bg-parchment-dark border-t border-brass/30 flex justify-between items-center shrink-0">
+        <span id="modal-location" class="text-xs text-parchment-ink/70 font-medium">📍 臺中舊城區</span>
+        <button onclick="closeDetailModal()" class="px-5 py-2 rounded-xl bg-corten-deep text-parchment text-sm font-bold hover:bg-corten-rust transition">
+          返回時光壁
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- 彈窗二：臺中舊城時光偵探電子紀念證書 Modal                -->
+  <!-- ========================================================= -->
+  <div id="cert-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+    <div class="bg-parchment text-parchment-ink w-full max-w-lg rounded-3xl border-4 border-brass shadow-2xl overflow-hidden animate-fade-up">
+      <div class="p-6 sm:p-8 text-center relative bg-[radial-gradient(circle_at_top,#fffdf9,#f2e5ce)]">
+        <div class="flex justify-end">
+          <button onclick="closeCertificateModal()" class="w-8 h-8 rounded-full bg-corten-deep/10 hover:bg-corten-deep hover:text-parchment flex items-center justify-center text-sm font-bold transition">✕</button>
+        </div>
+
+        <div class="w-16 h-16 mx-auto mb-3 rounded-full medallion-disc border-2 border-brass flex items-center justify-center">
+          <span class="text-2xl">🏅</span>
+        </div>
+
+        <p class="text-xs tracking-[0.25em] uppercase text-corten-rust font-bold">TAICHUNG OLD TOWN TIME WALL</p>
+        <h3 class="font-serif text-2xl sm:text-3xl font-black text-corten-deep mt-1">臺中舊城時光偵探證書</h3>
+
+        <div class="my-5 py-4 px-4 rounded-2xl bg-white/80 border border-brass/40 shadow-inner">
+          <label for="detective-name" class="block text-xs text-parchment-ink/65 mb-1">請輸入您的專屬走讀稱號／姓名：</label>
+          <input id="detective-name" type="text" maxlength="16" placeholder="例如：舊城探險家 小明"
+            oninput="saveDetectiveName(this.value)"
+            class="w-full text-center font-serif text-xl font-bold text-corten-deep bg-transparent border-b-2 border-brass focus:outline-none pb-1" />
+          
+          <p class="text-xs sm:text-sm text-parchment-ink/85 mt-4 leading-relaxed">
+            於臺中舊城歷史廊道完成 <strong id="cert-solved-num" class="text-corten-rust text-base">0</strong> / 14 處歷史地標鏤空圖徽探勘，成功依時間軸解讀 1908–1938 年間的城市建築密碼。
+          </p>
+          <div class="mt-3 inline-block px-3.5 py-1 rounded-full bg-corten-deep text-brass-light text-xs font-bold" id="cert-rank-badge">
+            認證階級：見習走讀旅人
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-2.5 justify-center">
+          <button onclick="copyShareResult()" class="px-5 py-2.5 rounded-xl bg-corten-deep text-parchment text-sm font-bold hover:bg-corten-rust transition flex items-center justify-center gap-1.5">
+            <span>📋</span><span>複製通關戰績分享</span>
+          </button>
+          <button onclick="closeCertificateModal()" class="px-5 py-2.5 rounded-xl bg-brass text-corten-dark text-sm font-bold hover:bg-brass-light transition">
+            繼續探索
+          </button>
+        </div>
+        <p class="text-[11px] text-parchment-ink/55 mt-3">💡 歡迎直接手機截圖保存您的專屬時光偵探證書！</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- 核心資料與互動邏輯 (JavaScript)                           -->
+  <!-- ========================================================= -->
+  <script>
+    /**
+     * 嚴格依建造年份（1908 → 1938）編排的 14 處歷史地標資料（含 3 處雙版本圓徽，共 17 組）
+     */
+    const LANDMARKS = [
+      {
+        order: 1,
+        id: "L01",
+        year: "1908",
+        era: "1908-1917",
+        eraTitle: "1908–1917 鐵道與官廳奠基",
+        milestone: "1908 縱貫鐵路全線通車",
+        sameYearGroup: "1908 雙慶典地標 ①",
+        name: "中山綠橋",
+        altName: "新盛橋",
+        location: "中區綠川東西街與中山路口",
+        history: "建於 1908 年（明治 41 年），原名「新盛橋」，是為慶祝臺灣縱貫鐵路全線通車典禮而興建的重要橋梁。橋身採用當時先進的鋼筋混凝土與鑄鐵雕花欄杆，見證了臺中現代化都市計畫的起點。",
+        walkTip: "走訪綠川水岸廊道時，不妨低頭觀察橋側保留的百年鑄鐵花紋，與耐候鋼牆上的圓徽兩相對照！",
+        medallions: [
+          {
+            id: "m01",
+            badgeType: "新藝術鑄鐵紋飾",
+            svgKey: "1908-bridge",
+            subtitle: "跨越綠川的新藝術風格鑄鐵欄杆花紋",
+            designNote: "圖徽取自中山綠橋橋身經典的鑄鐵欄杆裝飾，以中央對稱葉脈搭配底部雙渦卷（Scroll）線條，展現明治末期流行的歐洲新藝術（Art Nouveau）植物曲線美學。"
+          }
+        ]
+      },
+      {
+        order: 2,
+        id: "L02",
+        year: "1908",
+        era: "1908-1917",
+        eraTitle: "1908–1917 鐵道與官廳奠基",
+        milestone: null,
+        sameYearGroup: "1908 雙慶典地標 ②",
+        name: "湖心亭",
+        altName: "臺中公園雙亭",
+        location: "北區公園路37-1號（臺中公園內）",
+        history: "同樣落成於 1908 年，為臺灣縱貫鐵路全通式所建的休憩涼亭，當時日本皇室閑院宮載仁親王曾親臨主持典禮。雙亭採西洋式木造建築手法融合日式屋頂，成為臺中百年不變的城市地標。",
+        walkTip: "注意看屋頂的兩個尖頂一高一低，這正是湖心亭雙亭並立結構的獨特辨識特徵。",
+        medallions: [
+          {
+            id: "m02",
+            badgeType: "建築剪影版",
+            svgKey: "1908-pavilion",
+            subtitle: "雙亭並立的尖頂歇山式屋頂與格柵窗影",
+            designNote: "鏤空剪影精準捕捉湖心亭一大一小「雙亭並立」的高聳尖頂屋脊，以及亭身細密的木造格柵窗棂，陽光穿透時宛如日月潭水波倒影。"
+          }
+        ]
+      },
+      {
+        order: 3,
+        id: "L03",
+        year: "1912",
+        era: "1908-1917",
+        eraTitle: "1908–1917 鐵道與官廳奠基",
+        milestone: "1912 糖業現代化起步",
+        sameYearGroup: null,
+        name: "帝國製糖廠",
+        altName: "臺中營業所",
+        location: "東區樂業路30號（湧泉公園旁）",
+        history: "創立於 1910 年、1912 年正式運作的帝國製糖株式會社臺中工場，曾帶動臺中東區與鐵道周邊的經濟繁榮。戰後轉為臺糖臺中糖廠，現存的臺中營業所已修復為充滿歷史氛圍的產業故事館與生態湖畔園區。",
+        walkTip: "這枚帶有英文字母「STC」的圓徽在整面耐候鋼牆上非常醒目，是最容易一眼認出的產業徽章！",
+        medallions: [
+          {
+            id: "m03",
+            badgeType: "企業社徽版",
+            svgKey: "1912-sugar",
+            subtitle: "經典「STC」交疊字樣與雙環社徽",
+            designNote: "圓徽內以大寫「T」字橫跨「S」與「C」，代表 Teikoku Sugar Company（帝國製糖株式會社），外圍雙同心圓與底部字樣展現日治時期大型產業會社的企業識別美學。"
+          }
+        ]
+      },
+      {
+        order: 4,
+        id: "L04",
+        year: "1913",
+        era: "1908-1917",
+        eraTitle: "1908–1917 鐵道與官廳奠基",
+        milestone: "1913 州廳定都核心（雙版本並列）",
+        sameYearGroup: null,
+        name: "臺中州廳",
+        altName: "臺中廳舍／舊臺中市市章",
+        location: "西區民權路99號",
+        history: "1913 年（大正 2 年）完成第一期工程，後歷經多次擴建成為管轄臺中、彰化、南投的最高行政中心。建築融合法國巴洛克與日本辰野式風格；牆面上特別同時設置了「幾何同心圓十字市章版」與「衛塔山牆建築剪影版」兩枚圓徽。",
+        walkTip: "在耐候鋼牆上，臺中州廳同時擁有「幾何市章」與「建築剪影」兩枚不同風格的 1913 圓徽，試著將幾何版的十字開口連起來，就能看出「中」字意象！",
+        medallions: [
+          {
+            id: "m05",
+            badgeType: "幾何市章版",
+            svgKey: "1913-prefecture-emblem",
+            subtitle: "同心圓與十字放射幾何市章紋飾",
+            designNote: "以四層同心圓環為基底，上下左右四向以十字通道切開，形成「中」字與放射光芒的幾何變體，象徵臺中位居臺灣地理與交通樞紐的核心地位。"
+          },
+          {
+            id: "m04",
+            badgeType: "建築剪影版",
+            svgKey: "1913-prefecture-arch",
+            subtitle: "法式馬薩式屋頂、中央衛塔與山牆正立面",
+            designNote: "設計師森山松之助作品的經典立面輪廓：高聳的馬薩式屋頂、中央主入口山形牆與兩側對稱翼樓柱列，在圓盤中展現莊嚴宏偉的官署氣勢。"
+          }
+        ]
+      },
+      {
+        order: 5,
+        id: "L05",
+        year: "1916",
+        era: "1908-1917",
+        eraTitle: "1908–1917 鐵道與官廳奠基",
+        milestone: null,
+        sameYearGroup: null,
+        name: "柳原教會",
+        altName: "臺灣基督長老教會柳原教會",
+        location: "中區興中街119號",
+        history: "1915 年依英國教會建築圖樣興建、1916 年完工，是臺中市區歷史最悠久的基督教長老教會之一。紅磚砌造的清水磚牆與拱圈設計，至今仍屹立於柳川畔。",
+        walkTip: "三連拱的半圓弧線條是柳原教會最迷人的建築語言，現場找找看哪個圓徽像三座並排的拱門！",
+        medallions: [
+          {
+            id: "m06",
+            badgeType: "建築立面版",
+            svgKey: "1916-church",
+            subtitle: "經典三連圓拱門窗與紅磚教堂輪廓",
+            designNote: "以簡潔俐落的線條勾勒教堂正面最具代表性的「高低三連圓拱門窗」，中央拱門高聳、兩側拱窗對稱，傳遞出靜謐神聖的宗教建築美感。"
+          }
+        ]
+      },
+      {
+        order: 6,
+        id: "L06",
+        year: "1917",
+        era: "1908-1917",
+        eraTitle: "1908–1917 鐵道與官廳奠基",
+        milestone: "1917 鐵道門戶誕生",
+        sameYearGroup: null,
+        name: "臺中火車站",
+        altName: "第二代臺中驛",
+        location: "中區臺灣大道一段1號",
+        history: "1917 年（大正 6 年）完工的第二代臺中火車站，為典型的「辰野式」紅磚建築，紅磚牆面嵌以白色水平飾帶，見證百年來無數旅人離鄉與歸鄉的記憶。",
+        walkTip: "觀察鐘塔頂端的尖頂與圓形鐘面，這是辨識 1917 臺中火車站的關鍵密碼。",
+        medallions: [
+          {
+            id: "m07",
+            badgeType: "建築剪影版",
+            svgKey: "1917-station",
+            subtitle: "辰野金吾風格尖頂鐘塔與連續拱廊剪影",
+            designNote: "右側高聳的文藝復興式尖頂鐘塔（帶有圓形時鐘窗），搭配左側紅磚白飾帶立面與一樓連續拱門，是臺中人最熟悉的城市門戶剪影。"
+          }
+        ]
+      },
+      {
+        order: 7,
+        id: "L07",
+        year: "1921",
+        era: "1921-1929",
+        eraTitle: "1921–1929 商業金融與產業擴張",
+        milestone: "1921 臺中設市自治新紀元",
+        sameYearGroup: null,
+        name: "臺中市役所",
+        altName: "舊臺中市政府辦公廳",
+        location: "西區民權路97號（臺中州廳旁）",
+        history: "1911 年興建為「臺中廳公共埤圳聯合會事務所」，1920 年臺中設市後，於 1921 年作為首任「臺中市役所」使用，是臺中市自治史的重要見證。",
+        walkTip: "和臺中火車站的方形鐘塔不同，臺中市役所擁有圓潤飽滿的巴洛克圓頂！",
+        medallions: [
+          {
+            id: "m08",
+            badgeType: "建築剪影版",
+            svgKey: "1921-cityhall",
+            subtitle: "巴洛克式圓頂尖塔與愛奧尼克柱列立面",
+            designNote: "以優雅的半球形穹頂（Dome）與高聳尖塔為視覺焦點，下方搭配三個圓形牛眼窗飾帶與古典柱列，展現華麗的西洋古典建築比例。"
+          }
+        ]
+      },
+      {
+        order: 8,
+        id: "L08",
+        year: "1924",
+        era: "1921-1929",
+        eraTitle: "1921–1929 商業金融與產業擴張",
+        milestone: "1924 專賣酒廠擴建（雙版本並列）",
+        sameYearGroup: null,
+        name: "臺中酒廠",
+        altName: "大正製酒株式會社／文化部文化資產園區",
+        location: "南區復興路三段362號",
+        history: "創設於 1916 年，1922 年實施酒類專賣制度後於 1924 年擴建為「臺中酒工場」。隨著都市發展酒廠遷往工業區，舊廠區轉型為今日的「文化部文化資產園區」。",
+        walkTip: "臺中酒廠在牆上同時擁有「幾何磚紋徽章版」與「山牆圓窗建築版」兩款圓徽，位於耐候鋼牆斜切縫線下方。",
+        medallions: [
+          {
+            id: "m10",
+            badgeType: "幾何徽章版",
+            svgKey: "1924-brewery-emblem",
+            subtitle: "同心圓環與交錯磚紋酒標紋飾",
+            designNote: "三層同心圓環內交織著錯落有致的水平與垂直線段，宛如酒廠紅磚倉庫的砌磚紋理，也神似傳統酒甕與酒標的幾何封印。"
+          },
+          {
+            id: "m09",
+            badgeType: "建築剪影版",
+            svgKey: "1924-brewery-arch",
+            subtitle: "三角形人字山牆與中央大牛眼圓窗廠房",
+            designNote: "呈現早期釀酒廠房典雅的對稱人字坡屋頂，山牆中央開有一座醒目的大型圓形牛眼窗（通風採光用），下方為方正廠房入口。"
+          }
+        ]
+      },
+      {
+        order: 9,
+        id: "L09",
+        year: "1929",
+        era: "1921-1929",
+        eraTitle: "1921–1929 商業金融與產業擴張",
+        milestone: "1929 金融與醫療現代化（雙版本並列）",
+        sameYearGroup: "1929 雙重時代印記 ①",
+        name: "合作金庫",
+        altName: "臺中州立圖書館／合作金庫臺中分行",
+        location: "中區自由路二段2號",
+        history: "落成於 1929 年（昭和 4 年），原為「臺中州立圖書館」，戰後由臺灣省合作金庫進駐使用。牆面上同時收錄了垂直現代主義立面的「建築剪影版」與四圓環相扣的「四葉草幾何徽章版」。",
+        walkTip: "觀察幾何版四個圓環交會的正中心，有一個小巧的菱形鏤空窗口；建築版屋頂則有四個俐落的三角形尖齒！",
+        medallions: [
+          {
+            id: "m11",
+            badgeType: "建築剪影版",
+            svgKey: "1929-coopbank-arch",
+            subtitle: "垂直現代主義線條與齒狀女兒牆立面",
+            designNote: "捨棄繁複的巴洛克雕飾，改採強調垂直上升感的長條窗列與頂部四座尖齒狀女兒牆（Parapet），展現 1920 年代末期邁向現代主義的折衷建築語彙。"
+          },
+          {
+            id: "m12",
+            badgeType: "四葉草幾何徽章版",
+            svgKey: "1929-coopbank-emblem",
+            subtitle: "四圓環交疊與中央菱形幾何徽章",
+            designNote: "上下左右四個圓環彼此緊密相扣，在圓心處自然圍塑出一枚精緻的菱形孔洞，象徵金融合作、四方匯聚與團結互助的精神。"
+          }
+        ]
+      },
+      {
+        order: 10,
+        id: "L10",
+        year: "1929",
+        era: "1921-1929",
+        eraTitle: "1921–1929 商業金融與產業擴張",
+        milestone: null,
+        sameYearGroup: "1929 雙重時代印記 ②",
+        name: "宮原氏別墅",
+        altName: "宮原武熊宅邸（市長公館）",
+        location: "北區雙十路一段125號",
+        history: "建於 1929 年，為日治時期留德眼科醫師宮原武熊的私人別墅（其開設的宮原眼科位於綠川旁）。宅邸融合和洋折衷風格，戰後曾作為臺中市長公館，現活化為藝文空間。",
+        walkTip: "就在 1929 合作金庫圓徽的右上方！兩個同為 1929 年的圓徽比鄰而居。",
+        medallions: [
+          {
+            id: "m13",
+            badgeType: "幾何家徽版",
+            svgKey: "1929-miyahara",
+            subtitle: "雙圓環優雅交疊幾何徽章",
+            designNote: "左右兩組雙線圓環在中央交錯重疊，宛如日本傳統「輪違紋（Wachigai）」家徽變體，兼具和風典雅與昭和摩登的幾何韻律。"
+          }
+        ]
+      },
+      {
+        order: 11,
+        id: "L11",
+        year: "1930",
+        era: "1930-1938",
+        eraTitle: "1930–1938 宗族文化與現代生活",
+        milestone: "1930 傳統宗族建築大成",
+        sameYearGroup: null,
+        name: "林氏宗祠",
+        altName: "臺中林氏宗廟",
+        location: "南區國光路55號",
+        history: "臺中林氏宗廟始建於清代，1919 年遷建至現址並於 1930 年（昭和 5 年）完成整體重修落成。匯集當時頂尖大木作與交趾陶匠師，是臺中極具代表性的傳統閩式宗祠古蹟。",
+        walkTip: "細看圓徽的左右兩半，其實是兩個對稱的篆體「木」字合組成「林」字！",
+        medallions: [
+          {
+            id: "m14",
+            badgeType: "傳統篆刻圓徽",
+            svgKey: "1930-lin",
+            subtitle: "圓形傳統「林」字與「壽」字意象篆刻紋飾",
+            designNote: "以傳統篆書筆法將雙「木」成「林」的漢字結構巧妙融入圓形團壽紋飾中，左右對稱、線條剛柔並濟，展現臺灣傳統宗族建築的雕刻藝術。"
+          }
+        ]
+      },
+      {
+        order: 12,
+        id: "L12",
+        year: "1935",
+        era: "1930-1938",
+        eraTitle: "1930–1938 宗族文化與現代生活",
+        milestone: "1935–1938 文化、廣播與武道興盛",
+        sameYearGroup: null,
+        name: "臺中放送局",
+        altName: "臺中廣播電臺",
+        location: "北區電台街1號",
+        history: "1935 年（昭和 10 年）開播的臺中放送局，是臺灣第三座廣播電臺，建築融合羅馬風格與現代主義語彙。當年透過空中電波，將新聞、音樂與棒球賽實況傳遍中部地區。",
+        walkTip: "這個符號是不是很像現代手機或 Wi-Fi 的訊號天線？早在 1935 年就設計得如此前衛！",
+        medallions: [
+          {
+            id: "m15",
+            badgeType: "電波符號圓徽",
+            svgKey: "1935-broadcast",
+            subtitle: "經典電臺天線電波符號圓徽",
+            designNote: "中央一根垂直天線主軸，上下兩端各有一道向內包覆的弧形電波線條，極簡而充滿現代感地表現無線電廣播訊號向四面八方傳遞的意象。"
+          }
+        ]
+      },
+      {
+        order: 13,
+        id: "L13",
+        year: "1937",
+        era: "1930-1938",
+        eraTitle: "1930–1938 宗族文化與現代生活",
+        milestone: null,
+        sameYearGroup: null,
+        name: "道禾六藝文化館",
+        altName: "臺中刑務所演武場",
+        location: "西區林森路33號",
+        history: "落成於 1937 年（昭和 12 年），原為臺中刑務所司獄官與警察日常練習柔道、劍道的「演武場」。建築採傳統日式入母屋造屋頂與高架木地板，現活化為推廣茶道、琴道、書道等六藝的文化園區。",
+        walkTip: "這是在整面時光壁上唯一直接以單一大型漢字「武」作為主體的圓徽，氣勢十足！",
+        medallions: [
+          {
+            id: "m16",
+            badgeType: "書法漢字圓徽",
+            svgKey: "1937-butokuden",
+            subtitle: "剛勁有力的書法「武」字鏤空圓徽",
+            designNote: "直接以渾厚剛勁的楷隸書法「武」字填滿整個耐候鋼圓盤，筆畫轉折處保留金屬連接筋，光影投射下彰顯武道精神與傳統建築的莊重氣韻。"
+          }
+        ]
+      },
+      {
+        order: 14,
+        id: "L14",
+        year: "1938",
+        era: "1930-1938",
+        eraTitle: "1930–1938 宗族文化與現代生活",
+        milestone: "1938 三十年舊城建築史璀璨句點",
+        sameYearGroup: null,
+        name: "株式會社彰化銀行本店",
+        altName: "彰化銀行總行",
+        location: "中區自由路二段38號",
+        history: "彰化銀行創立於 1905 年，1910 年總行遷至臺中，並於 1938 年（昭和 13 年）在自由路現址建成氣派的古典柱式本店大樓，戰後一度作為臺灣省議會臨時議事堂。",
+        walkTip: "這是整面時光壁上年份最晚（1938 年）的一枚圓徽，為 1908–1938 三十年的舊城建築史畫下璀璨句點！",
+        medallions: [
+          {
+            id: "m17",
+            badgeType: "銀行行徽版",
+            svgKey: "1938-chb",
+            subtitle: "四瓣花形與中央圓孔星芒行徽",
+            designNote: "融合傳統銅錢方圓意象與四瓣花葉曲線，外環四隅對稱切出花瓣弧度，中央保留圓形透光孔，象徵財富匯流、誠信穩健的金融百年基業。"
+          }
+        ]
+      }
+    ];
+
+    // 攤平 17 組單獨圓徽清單（供快問快答與彈窗查詢使用，維持嚴格時間排序）
+    const ALL_MEDALLIONS_FLAT = LANDMARKS.flatMap((lm) =>
+      lm.medallions.map((m) => ({
+        ...m,
+        landmarkId: lm.id,
+        year: lm.year,
+        era: lm.era,
+        name: lm.medallions.length > 1 ? `${lm.name}（${m.badgeType}）` : lm.name,
+        baseName: lm.name,
+        altName: lm.altName,
+        history: lm.history,
+        walkTip: lm.walkTip,
+        location: lm.location
+      }))
+    );
+
+    /**
+     * 14 處地標尋寶解謎關卡（嚴格按照 1908 → 1938 時間軸排列）
+     */
+    const QUEST_STAGES = [
+      {
+        stage: 1,
+        year: "1908",
+        name: "中山綠橋",
+        landmarkId: "L01",
+        clue: "跨越綠川的新藝術風格鑄鐵欄杆花紋，有著對稱葉脈與底部雙渦卷。",
+        hint: "位於耐候鋼牆最左側起點附近，與湖心亭同為慶祝 1908 年縱貫鐵路全線通車所建！",
+        options: ["中山綠橋", "柳原教會", "宮原氏別墅", "林氏宗祠"]
+      },
+      {
+        stage: 2,
+        year: "1908",
+        name: "湖心亭",
+        landmarkId: "L02",
+        clue: "一大一小雙亭並立的尖頂歇山式屋頂輪廓，是臺中公園百年地標。",
+        hint: "年份與中山綠橋相同（1908），就位於 1912 帝國製糖廠的左上方。",
+        options: ["臺中火車站", "湖心亭", "臺中州廳", "臺中酒廠"]
+      },
+      {
+        stage: 3,
+        year: "1912",
+        name: "帝國製糖廠",
+        landmarkId: "L03",
+        clue: "圓形社徽中藏有三個英文字母「STC」，代表製糖會社的英文縮寫。",
+        hint: "年份介於 1908 湖心亭與 1913 臺中州廳之間，是 1910 年代初的產業地標。",
+        options: ["合作金庫", "臺中酒廠", "帝國製糖廠", "株式會社彰化銀行本店"]
+      },
+      {
+        stage: 4,
+        year: "1913",
+        name: "臺中州廳",
+        landmarkId: "L04",
+        clue: "在牆面上同時擁有「幾何同心圓十字市章版」與「法式衛塔山牆建築版」兩枚圓徽。",
+        hint: "民國二年（西元 1913 年）落成的最高行政官署建築。",
+        options: ["臺中市役所", "臺中州廳", "臺中火車站", "合作金庫"]
+      },
+      {
+        stage: 5,
+        year: "1916",
+        name: "柳原教會",
+        landmarkId: "L05",
+        clue: "經典的「高低三連圓拱門窗」立面輪廓，是柳川畔的百年紅磚教堂。",
+        hint: "年份在 1913 臺中州廳與 1917 臺中火車站之間（1916 年）。",
+        options: ["柳原教會", "道禾六藝文化館", "中山綠橋", "林氏宗祠"]
+      },
+      {
+        stage: 6,
+        year: "1917",
+        name: "臺中火車站",
+        landmarkId: "L06",
+        clue: "右側有高聳的辰野式尖頂鐘塔與圓形鐘面，左側為連續拱廊立面。",
+        hint: "1917 年完工的第二代臺中驛，位於牆面轉折高處。",
+        options: ["臺中市役所", "臺中酒廠", "臺中火車站", "臺中州廳"]
+      },
+      {
+        stage: 7,
+        year: "1921",
+        name: "臺中市役所",
+        landmarkId: "L07",
+        clue: "巴洛克式半球形圓頂尖塔，立面橫向飾帶嵌有三個圓形牛眼窗。",
+        hint: "緊鄰臺中州廳，1920 年臺中設市後於隔年（1921 年）正式啟用。",
+        options: ["宮原氏別墅", "臺中市役所", "合作金庫", "臺中放送局"]
+      },
+      {
+        stage: 8,
+        year: "1924",
+        name: "臺中酒廠",
+        landmarkId: "L08",
+        clue: "同時擁有「交錯磚紋酒標幾何版」與「三角形人字屋頂大圓窗建築版」兩枚圓徽。",
+        hint: "位於牆面斜切縫線下方，建於 1924 年，現為文化部文化資產園區。",
+        options: ["帝國製糖廠", "臺中酒廠", "柳原教會", "林氏宗祠"]
+      },
+      {
+        stage: 9,
+        year: "1929",
+        name: "合作金庫",
+        landmarkId: "L09",
+        clue: "同時擁有「垂直齒狀女兒牆建築版」與「四圓環相扣中央菱形幾何版」兩枚圓徽。",
+        hint: "原為臺中州立圖書館，建於 1929 年，位於牆面下方靠近地面處。",
+        options: ["株式會社彰化銀行本店", "合作金庫", "宮原氏別墅", "臺中市役所"]
+      },
+      {
+        stage: 10,
+        year: "1929",
+        name: "宮原氏別墅",
+        landmarkId: "L10",
+        clue: "左右兩組雙線圓環在中央優雅交疊，神似日本傳統「輪違紋」家徽。",
+        hint: "與合作金庫同為 1929 年建造，就位在合作金庫圓徽的右上方！",
+        options: ["宮原氏別墅", "湖心亭", "臺中放送局", "道禾六藝文化館"]
+      },
+      {
+        stage: 11,
+        year: "1930",
+        name: "林氏宗祠",
+        landmarkId: "L11",
+        clue: "將左右對稱的篆體雙「木」巧妙融入圓形團壽紋飾之中。",
+        hint: "1930 年重修落成的臺中傳統閩式宗祠古蹟，位於宮原氏別墅右側。",
+        options: ["道禾六藝文化館", "林氏宗祠", "中山綠橋", "柳原教會"]
+      },
+      {
+        stage: 12,
+        year: "1935",
+        name: "臺中放送局",
+        landmarkId: "L12",
+        clue: "中央一根垂直天線主軸，上下兩端各有一道弧形電波線條。",
+        hint: "1935 年開播的廣播電臺，象徵無線電波傳遞的幾何符號。",
+        options: ["臺中放送局", "臺中火車站", "帝國製糖廠", "株式會社彰化銀行本店"]
+      },
+      {
+        stage: 13,
+        year: "1937",
+        name: "道禾六藝文化館",
+        landmarkId: "L13",
+        clue: "圓盤內直接以剛勁渾厚的書法漢字「武」作為鏤空主體。",
+        hint: "1937 年落成的臺中刑務所演武場，位於牆面斜切線上方的顯眼位置。",
+        options: ["林氏宗祠", "道禾六藝文化館", "臺中酒廠", "宮原氏別墅"]
+      },
+      {
+        stage: 14,
+        year: "1938",
+        name: "株式會社彰化銀行本店",
+        landmarkId: "L14",
+        clue: "四瓣花形與中央圓孔星芒行徽，象徵財富匯流、誠信穩健的金融百年基業。",
+        hint: "整面時光壁年份最晚（1938 年）的圓徽，位於最右側壓軸登場！",
+        options: ["株式會社彰化銀行本店", "帝國製糖廠", "臺中州廳", "合作金庫"]
+      }
+    ];
+
+    // =========================================================
+    // 17 組耐候鋼鏤空圓徽高精度向量圖庫 (SVG)
+    // =========================================================
+    function getMedallionSVG(svgKey) {
+      const baseDefs = `
+        <defs>
+          <radialGradient id="backing-${svgKey}" cx="50%" cy="45%" r="55%">
+            <stop offset="0%" stop-color="#f7eed9" />
+            <stop offset="75%" stop-color="#dfd0b8" />
+            <stop offset="100%" stop-color="#b8a589" />
+          </radialGradient>
+        </defs>
+        <circle cx="50" cy="50" r="46" fill="url(#backing-${svgKey})" />
+      `;
+
+      const steel = "#5a2b1b";
+      const steelDark = "#3b190e";
+      let art = "";
+
+      switch (svgKey) {
+        case "1908-bridge": // 中山綠橋：新藝術鑄鐵欄杆對稱植物花紋
+          art = `
+            <path d="M50 8 C54 18, 53 32, 50 48 C47 32, 46 18, 50 8 Z" fill="${steel}" />
+            <path d="M50 20 C62 18, 72 24, 76 34 C65 32, 56 30, 50 34 Z" fill="${steel}" />
+            <path d="M50 20 C38 18, 28 24, 24 34 C35 32, 44 30, 50 34 Z" fill="${steel}" />
+            <path d="M50 34 C66 32, 80 40, 84 52 C70 50, 58 46, 50 48 Z" fill="${steel}" />
+            <path d="M50 34 C34 32, 20 40, 16 52 C30 50, 42 46, 50 48 Z" fill="${steel}" />
+            <path d="M50 54 C62 54, 72 62, 70 74 C68 82, 58 82, 58 74 C58 68, 63 66, 65 70" fill="none" stroke="${steel}" stroke-width="5" stroke-linecap="round" />
+            <path d="M50 54 C38 54, 28 62, 30 74 C32 82, 42 82, 42 74 C42 68, 37 66, 35 70" fill="none" stroke="${steel}" stroke-width="5" stroke-linecap="round" />
+            <rect x="46" y="46" width="8" height="44" fill="${steel}" />
+          `;
+          break;
+
+        case "1908-pavilion": // 湖心亭：雙亭尖頂與格柵窗影
+          art = `
+            <path d="M12 52 Q28 44 36 26 Q42 40 50 44 L50 52 Z" fill="${steel}" />
+            <path d="M36 48 Q54 40 64 18 Q72 38 88 48 L88 53 L36 53 Z" fill="${steel}" />
+            <rect x="20" y="52" width="60" height="4" fill="${steel}" />
+            <rect x="24" y="56" width="6" height="32" fill="${steel}" />
+            <rect x="44" y="56" width="7" height="32" fill="${steel}" />
+            <rect x="70" y="56" width="7" height="32" fill="${steel}" />
+            <rect x="24" y="66" width="53" height="3.5" fill="${steel}" />
+            <rect x="24" y="75" width="53" height="3.5" fill="${steel}" />
+            <line x1="34" y1="66" x2="34" y2="86" stroke="${steel}" stroke-width="2.5" />
+            <line x1="56" y1="66" x2="56" y2="86" stroke="${steel}" stroke-width="2.5" />
+            <line x1="63" y1="66" x2="63" y2="86" stroke="${steel}" stroke-width="2.5" />
+          `;
+          break;
+
+        case "1912-sugar": // 帝國製糖廠：STC 社徽
+          art = `
+            <circle cx="50" cy="50" r="40" fill="none" stroke="${steel}" stroke-width="3.5" />
+            <circle cx="50" cy="50" r="34" fill="none" stroke="${steel}" stroke-width="2" />
+            <rect x="22" y="25" width="56" height="8" rx="1" fill="${steel}" />
+            <rect x="46" y="27" width="8" height="46" fill="${steel}" />
+            <text x="32" y="61" text-anchor="middle" font-family="serif" font-weight="900" font-size="31" fill="${steel}">S</text>
+            <text x="68" y="61" text-anchor="middle" font-family="serif" font-weight="900" font-size="31" fill="${steel}">C</text>
+            <rect x="38" y="74" width="24" height="5" fill="${steel}" />
+          `;
+          break;
+
+        case "1913-prefecture-emblem": // 臺中州廳：幾何市章版
+          art = `
+            <circle cx="50" cy="50" r="38" fill="none" stroke="${steel}" stroke-width="5.5" />
+            <circle cx="50" cy="50" r="28" fill="none" stroke="${steel}" stroke-width="5" />
+            <circle cx="50" cy="50" r="18" fill="none" stroke="${steel}" stroke-width="4.5" />
+            <rect x="45.5" y="6" width="9" height="27" fill="${steel}" />
+            <rect x="45.5" y="67" width="9" height="27" fill="${steel}" />
+            <rect x="6" y="45.5" width="27" height="9" fill="${steel}" />
+            <rect x="67" y="45.5" width="27" height="9" fill="${steel}" />
+          `;
+          break;
+
+        case "1913-prefecture-arch": // 臺中州廳：建築剪影版
+          art = `
+            <path d="M16 40 L24 28 L76 28 L84 40 Z" fill="${steel}" />
+            <path d="M40 30 L50 18 L60 30 Z" fill="${steel}" />
+            <rect x="14" y="40" width="72" height="6" fill="${steel}" />
+            <rect x="18" y="46" width="7" height="36" fill="${steel}" />
+            <rect x="34" y="46" width="7" height="36" fill="${steel}" />
+            <rect x="59" y="46" width="7" height="36" fill="${steel}" />
+            <rect x="75" y="46" width="7" height="36" fill="${steel}" />
+            <path d="M32 76 L50 62 L68 76 L68 86 L32 86 Z" fill="${steel}" />
+            <rect x="45" y="74" width="10" height="12" fill="#efe3cc" />
+          `;
+          break;
+
+        case "1916-church": // 柳原教會：三連圓拱門窗
+          art = `
+            <path d="M12 46 L12 88 L88 88 L88 46 L74 46 C74 34 65 28 60 28 C58 18 42 18 40 28 C35 28 26 34 26 46 Z" fill="${steel}" />
+            <path d="M42 82 L42 42 A8 8 0 0 1 58 42 L58 82 Z" fill="#efe3cc" />
+            <path d="M21 82 L21 52 A7 7 0 0 1 35 52 L35 82 Z" fill="#efe3cc" />
+            <path d="M65 82 L65 52 A7 7 0 0 1 79 52 L79 82 Z" fill="#efe3cc" />
+            <path d="M38 40 A12 12 0 0 1 62 40" fill="none" stroke="#efe3cc" stroke-width="2" />
+          `;
+          break;
+
+        case "1917-station": // 臺中火車站：辰野式鐘塔與拱廊
+          art = `
+            <path d="M58 26 L64 13 L70 26 Z" fill="${steel}" />
+            <rect x="57" y="26" width="14" height="14" fill="${steel}" />
+            <circle cx="64" cy="33" r="4" fill="#efe3cc" />
+            <path d="M16 54 L26 40 L57 40 L57 54 Z" fill="${steel}" />
+            <rect x="16" y="54" width="68" height="5" fill="${steel}" />
+            <rect x="16" y="64" width="68" height="4" fill="${steel}" />
+            <rect x="18" y="54" width="6" height="32" fill="${steel}" />
+            <rect x="33" y="54" width="6" height="32" fill="${steel}" />
+            <rect x="48" y="54" width="6" height="32" fill="${steel}" />
+            <rect x="64" y="54" width="6" height="32" fill="${steel}" />
+            <rect x="78" y="54" width="6" height="32" fill="${steel}" />
+            <rect x="16" y="83" width="68" height="5" fill="${steel}" />
+          `;
+          break;
+
+        case "1921-cityhall": // 臺中市役所：巴洛克圓頂與牛眼窗
+          art = `
+            <path d="M48 10 L50 4 L52 10 L52 22 L48 22 Z" fill="${steel}" />
+            <path d="M30 42 A20 20 0 0 1 70 42 Z" fill="${steel}" />
+            <rect x="24" y="42" width="52" height="18" fill="${steel}" />
+            <circle cx="31" cy="51" r="4.5" fill="#efe3cc" />
+            <circle cx="50" cy="51" r="5.5" fill="#efe3cc" />
+            <circle cx="69" cy="51" r="4.5" fill="#efe3cc" />
+            <rect x="20" y="60" width="60" height="4.5" fill="${steel}" />
+            <rect x="28" y="64" width="6" height="24" fill="${steel}" />
+            <rect x="41" y="64" width="6" height="24" fill="${steel}" />
+            <rect x="53" y="64" width="6" height="24" fill="${steel}" />
+            <rect x="66" y="64" width="6" height="24" fill="${steel}" />
+          `;
+          break;
+
+        case "1924-brewery-emblem": // 臺中酒廠：幾何磚紋徽章版
+          art = `
+            <circle cx="50" cy="50" r="39" fill="none" stroke="${steel}" stroke-width="4" />
+            <circle cx="50" cy="50" r="28" fill="none" stroke="${steel}" stroke-width="3.5" />
+            <circle cx="50" cy="50" r="17" fill="none" stroke="${steel}" stroke-width="3.5" />
+            <line x1="50" y1="11" x2="50" y2="33" stroke="${steel}" stroke-width="4" />
+            <line x1="15" y1="38" x2="85" y2="38" stroke="${steel}" stroke-width="4" />
+            <line x1="12" y1="50" x2="88" y2="50" stroke="${steel}" stroke-width="4" />
+            <line x1="16" y1="62" x2="84" y2="62" stroke="${steel}" stroke-width="4" />
+            <line x1="36" y1="38" x2="36" y2="50" stroke="${steel}" stroke-width="4" />
+            <line x1="64" y1="38" x2="64" y2="50" stroke="${steel}" stroke-width="4" />
+            <line x1="50" y1="50" x2="50" y2="62" stroke="${steel}" stroke-width="4" />
+            <line x1="36" y1="62" x2="36" y2="85" stroke="${steel}" stroke-width="4" />
+            <line x1="64" y1="62" x2="64" y2="85" stroke="${steel}" stroke-width="4" />
+          `;
+          break;
+
+        case "1924-brewery-arch": // 臺中酒廠：山牆牛眼圓窗建築版
+          art = `
+            <path d="M12 48 L50 22 L88 48 L84 53 L50 30 L16 53 Z" fill="${steel}" />
+            <rect x="26" y="42" width="48" height="44" fill="${steel}" />
+            <circle cx="50" cy="48" r="10" fill="#efe3cc" />
+            <circle cx="50" cy="48" r="6" fill="${steel}" />
+            <rect x="33" y="64" width="34" height="4.5" fill="#efe3cc" />
+            <rect x="36" y="73" width="28" height="13" fill="#efe3cc" />
+          `;
+          break;
+
+        case "1929-coopbank-arch": // 合作金庫：垂直現代主義立面
+          art = `
+            <path d="M36 22 L41 14 L46 22 L50 14 L54 22 L59 14 L64 22 L64 86 L36 86 Z" fill="${steel}" />
+            <rect x="16" y="28" width="18" height="58" fill="${steel}" />
+            <rect x="66" y="28" width="18" height="58" fill="${steel}" />
+            <rect x="20" y="38" width="4" height="42" fill="#efe3cc" />
+            <rect x="27" y="38" width="4" height="42" fill="#efe3cc" />
+            <rect x="41" y="26" width="3.5" height="24" fill="#efe3cc" />
+            <rect x="48.2" y="26" width="3.5" height="24" fill="#efe3cc" />
+            <rect x="55.5" y="26" width="3.5" height="24" fill="#efe3cc" />
+            <rect x="41" y="64" width="18" height="22" fill="#efe3cc" />
+            <rect x="69" y="38" width="4" height="42" fill="#efe3cc" />
+            <rect x="76" y="38" width="4" height="42" fill="#efe3cc" />
+          `;
+          break;
+
+        case "1929-coopbank-emblem": // 合作金庫：四圓環菱形徽章
+          art = `
+            <circle cx="50" cy="28" r="16" fill="none" stroke="${steel}" stroke-width="7.5" />
+            <circle cx="50" cy="72" r="16" fill="none" stroke="${steel}" stroke-width="7.5" />
+            <circle cx="28" cy="50" r="16" fill="none" stroke="${steel}" stroke-width="7.5" />
+            <circle cx="72" cy="50" r="16" fill="none" stroke="${steel}" stroke-width="7.5" />
+          `;
+          break;
+
+        case "1929-miyahara": // 宮原氏別墅：雙圓環交疊家徽
+          art = `
+            <circle cx="38" cy="50" r="26" fill="none" stroke="${steel}" stroke-width="6.5" />
+            <circle cx="38" cy="50" r="18" fill="none" stroke="${steel}" stroke-width="2.5" />
+            <circle cx="62" cy="50" r="26" fill="none" stroke="${steel}" stroke-width="6.5" />
+            <circle cx="62" cy="50" r="18" fill="none" stroke="${steel}" stroke-width="2.5" />
+          `;
+          break;
+
+        case "1930-lin": // 林氏宗祠：篆刻「林」字圓徽
+          art = `
+            <rect x="46.5" y="8" width="7" height="84" fill="${steel}" />
+            <rect x="8" y="46.5" width="84" height="7" fill="${steel}" />
+            <path d="M46 20 C30 20 20 30 20 40 L38 40 L38 28 L28 28" fill="none" stroke="${steel}" stroke-width="5.5" stroke-linecap="square" />
+            <path d="M54 20 C70 20 80 30 80 40 L62 40 L62 28 L72 28" fill="none" stroke="${steel}" stroke-width="5.5" stroke-linecap="square" />
+            <path d="M18 58 L40 58 L40 82 C28 80 20 72 18 58 Z" fill="none" stroke="${steel}" stroke-width="5.5" />
+            <path d="M82 58 L60 58 L60 82 C72 80 80 72 82 58 Z" fill="none" stroke="${steel}" stroke-width="5.5" />
+            <line x1="26" y1="70" x2="74" y2="70" stroke="${steel}" stroke-width="5.5" />
+          `;
+          break;
+
+        case "1935-broadcast": // 臺中放送局：電波天線符號
+          art = `
+            <rect x="46.5" y="14" width="7" height="72" rx="2" fill="${steel}" />
+            <path d="M32 14 A20 20 0 0 0 68 14" fill="none" stroke="${steel}" stroke-width="6.5" stroke-linecap="round" />
+            <path d="M32 86 A20 20 0 0 1 68 86" fill="none" stroke="${steel}" stroke-width="6.5" stroke-linecap="round" />
+          `;
+          break;
+
+        case "1937-butokuden": // 道禾六藝文化館：書法「武」字
+          art = `
+            <text x="50" y="75" text-anchor="middle" font-family="'Noto Serif TC', serif" font-weight="900" font-size="72" fill="${steel}">武</text>
+          `;
+          break;
+
+        case "1938-chb": // 株式會社彰化銀行本店：四瓣花形行徽
+          art = `
+            <path d="M50 6 A44 44 0 1 1 49.9 6 Z M50 22 C44 34 34 44 22 50 C34 56 44 66 50 78 C56 66 66 56 78 50 C66 44 56 34 50 22 Z" fill="${steel}" fill-rule="evenodd" />
+            <circle cx="50" cy="50" r="14" fill="#efe3cc" />
+          `;
+          break;
+
+        default:
+          art = `<circle cx="50" cy="50" r="24" fill="${steel}" />`;
+      }
+
+      return `
+        <svg viewBox="0 0 100 100" class="w-full h-full drop-shadow" aria-hidden="true">
+          ${baseDefs}
+          ${art}
+          <circle cx="50" cy="50" r="46" fill="none" stroke="${steelDark}" stroke-width="6" />
+        </svg>
+      `;
+    }
+
+    // =========================================================
+    // 狀態管理 (State)
+    // =========================================================
+    let currentMode = "gallery";
+    let currentEra = "all";
+    let galleryLayout = "timeline"; // "timeline" | "grid"
+    let activeYearHighlight = null;
+    let currentQuestIdx = 0; // 0 ~ 13
+    let solvedStages = JSON.parse(localStorage.getItem("tc_timewall_solved_v2") || "[]");
+    let detectiveName = localStorage.getItem("tc_timewall_name") || "";
+
+    // 快問快答狀態
+    let quizQuestions = [];
+    let quizIndex = 0;
+    let quizScore = 0;
+    let quizAnswered = false;
+
+    // =========================================================
+    // 初始化與模式切換
+    // =========================================================
+    window.addEventListener("DOMContentLoaded", () => {
+      renderYearRuler();
+      renderGallery();
+      updateQuestUI();
+      initQuiz();
+      const nameInput = document.getElementById("detective-name");
+      if (nameInput && detectiveName) nameInput.value = detectiveName;
+    });
+
+    function switchMode(mode) {
+      currentMode = mode;
+      const views = ["gallery", "quest", "quiz"];
+      views.forEach((v) => {
+        const el = document.getElementById(`view-${v}`);
+        const btn = document.getElementById(`tab-${v}`);
+        if (v === mode) {
+          el.classList.remove("hidden");
+          btn.classList.add("bg-brass", "text-corten-dark", "shadow");
+          btn.classList.remove("text-parchment/80", "hover:text-parchment", "hover:bg-corten-rust/50");
+        } else {
+          el.classList.add("hidden");
+          btn.classList.remove("bg-brass", "text-corten-dark", "shadow");
+          btn.classList.add("text-parchment/80", "hover:text-parchment", "hover:bg-corten-rust/50");
+        }
+      });
+
+      if (mode === "quest") {
+        renderQuestStage();
+      }
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function showToast(msg, icon = "✨") {
+      const container = document.getElementById("toast-container");
+      document.getElementById("toast-msg").textContent = msg;
+      document.getElementById("toast-icon").textContent = icon;
+      container.classList.remove("opacity-0", "translate-y-4");
+      container.classList.add("opacity-100", "translate-y-0");
+
+      clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(() => {
+        container.classList.add("opacity-0", "translate-y-4");
+        container.classList.remove("opacity-100", "translate-y-0");
+      }, 2800);
+    }
+
+    // =========================================================
+    // 模式一：時光圖鑑總覽（嚴格 1908 → 1938 時間軸編排）
+    // =========================================================
+    function setGalleryLayout(layout) {
+      galleryLayout = layout;
+      const tBtn = document.getElementById("layout-timeline-btn");
+      const gBtn = document.getElementById("layout-grid-btn");
+      if (layout === "timeline") {
+        tBtn.className = "px-3 py-1.5 rounded-lg text-xs font-bold bg-brass text-corten-dark transition flex items-center gap-1";
+        gBtn.className = "px-3 py-1.5 rounded-lg text-xs font-bold text-parchment/75 hover:text-parchment transition flex items-center gap-1";
+      } else {
+        gBtn.className = "px-3 py-1.5 rounded-lg text-xs font-bold bg-brass text-corten-dark transition flex items-center gap-1";
+        tBtn.className = "px-3 py-1.5 rounded-lg text-xs font-bold text-parchment/75 hover:text-parchment transition flex items-center gap-1";
+      }
+      renderGallery();
+    }
+
+    function setEraFilter(era) {
+      currentEra = era;
+      activeYearHighlight = null;
+      document.querySelectorAll(".era-btn").forEach((btn) => {
+        if (btn.dataset.era === era) {
+          btn.className = "era-btn px-3.5 py-1.5 rounded-full text-xs font-bold bg-brass text-corten-dark transition";
+        } else {
+          btn.className = "era-btn px-3.5 py-1.5 rounded-full text-xs font-bold bg-corten-dark/70 text-parchment/85 border border-brass/30 hover:border-brass transition";
+        }
+      });
+      renderYearRuler();
+      renderGallery();
+    }
+
+    function renderYearRuler() {
+      const ruler = document.getElementById("year-ruler");
+      if (!ruler) return;
+
+      const visibleLandmarks = LANDMARKS.filter(
+        (lm) => currentEra === "all" || lm.era === currentEra
+      );
+      const uniqueYears = [...new Set(visibleLandmarks.map((lm) => lm.year))];
+
+      ruler.innerHTML = uniqueYears
+        .map((yr) => {
+          const isSelected = activeYearHighlight === yr;
+          return `<button onclick="jumpToYear('${yr}')"
+            class="px-2.5 py-1 rounded-lg font-serif text-xs font-bold transition shrink-0 border ${
+              isSelected
+                ? "bg-brass text-corten-dark border-brass shadow scale-105"
+                : "bg-corten-deep/80 text-brass-light border-brass/30 hover:bg-brass/25 hover:border-brass"
+            }">
+            ${yr}
+          </button>`;
+        })
+        .join("");
+    }
+
+    function jumpToYear(year) {
+      activeYearHighlight = year;
+      renderYearRuler();
+      renderGallery();
+
+      setTimeout(() => {
+        const targetEl = document.querySelector(`[data-year-anchor="${year}"]`);
+        if (targetEl) {
+          const yOffset = -145;
+          const y = targetEl.getBoundingClientRect().top + window.pageYOffset + yOffset;
+          window.scrollTo({ top: y, behavior: "smooth" });
+        }
+      }, 40);
+    }
+
+    function renderGallery() {
+      const container = document.getElementById("gallery-container");
+      const keyword = (document.getElementById("search-input")?.value || "").trim().toLowerCase();
+
+      const filtered = LANDMARKS.filter((lm) => {
+        const matchEra = currentEra === "all" || lm.era === currentEra;
+        const matchKey =
+          !keyword ||
+          lm.year.includes(keyword) ||
+          lm.name.toLowerCase().includes(keyword) ||
+          lm.altName.toLowerCase().includes(keyword) ||
+          lm.medallions.some(
+            (m) =>
+              m.subtitle.toLowerCase().includes(keyword) ||
+              m.badgeType.toLowerCase().includes(keyword)
+          );
+        return matchEra && matchKey;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-14 bg-corten-deep/60 rounded-2xl border border-brass/25">
+            <p class="text-lg font-serif text-brass-light mb-2">找不到符合「${keyword}」的圓徽記錄</p>
+            <button onclick="document.getElementById('search-input').value=''; setEraFilter('all');"
+              class="px-4 py-2 rounded-xl bg-brass text-corten-dark text-xs font-bold">
+              顯示全部 14 處地標（1908–1938）
+            </button>
+          </div>`;
+        return;
+      }
+
+      if (galleryLayout === "grid") {
+        // 網格並列模式（維持 1908 → 1938 嚴格順序）
+        container.innerHTML = `
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            ${filtered
+              .map((lm) => renderLandmarkCardInner(lm, false))
+              .join("")}
+          </div>`;
+        return;
+      }
+
+      // 垂直耐候鋼鏽紅時間軸模式
+      let seenYears = new Set();
+      container.innerHTML = `
+        <div class="relative pl-6 sm:pl-12 space-y-6">
+          <!-- 貫穿左側的耐候鋼鏽紅時間軸主幹 -->
+          <div class="absolute left-2.5 sm:left-5 top-2 bottom-4 w-1 rounded-full bg-gradient-to-b from-brass via-corten-light to-brass-dark shadow-[0_0_10px_rgba(212,163,89,0.45)]"></div>
+
+          ${filtered
+            .map((lm) => {
+              const isFirstOfYear = !seenYears.has(lm.year);
+              seenYears.add(lm.year);
+              const isHighlighted = activeYearHighlight === lm.year;
+
+              return `
+                <div ${isFirstOfYear ? `data-year-anchor="${lm.year}"` : ""} class="relative">
+                  <!-- 時間軸節點圓釘 -->
+                  <div class="absolute -left-[22px] sm:-left-[36px] top-6 w-4 h-4 sm:w-5 sm:h-5 rounded-full border-2 ${
+                    isHighlighted
+                      ? "bg-brass-light border-white scale-125 shadow-[0_0_12px_#f3e1b9]"
+                      : "bg-corten-dark border-brass"
+                  } flex items-center justify-center z-10 transition-transform">
+                    <span class="w-1.5 h-1.5 rounded-full bg-brass"></span>
+                  </div>
+
+                  <!-- 時代里程碑橫幅（若有） -->
+                  ${
+                    lm.milestone
+                      ? `<div class="mb-2.5 inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-corten-rust/80 border border-brass/40 text-xs font-bold text-brass-light shadow">
+                          <span>🚩</span><span>${lm.milestone}</span>
+                        </div>`
+                      : ""
+                  }
+
+                  ${renderLandmarkCardInner(lm, true, isHighlighted)}
+                </div>
+              `;
+            })
+            .join("")}
+        </div>
+      `;
+    }
+
+    function renderLandmarkCardInner(lm, isTimeline, isHighlighted = false) {
+      const isDual = lm.medallions.length > 1;
+      const highlightRing = isHighlighted
+        ? "ring-2 ring-brass border-brass bg-corten-rust/55"
+        : "border-brass/30 hover:border-brass bg-corten-deep/90 hover:bg-corten-rust/45";
+
+      return `
+        <article class="group rounded-2xl border ${highlightRing} p-5 sm:p-6 shadow-xl transition-all duration-300 relative overflow-hidden">
+          <!-- 卡片頂部：序號、西元年、地標名稱與同年代標記 -->
+          <div class="flex flex-wrap items-center justify-between gap-2 pb-4 border-b border-brass/20">
+            <div class="flex items-center gap-3">
+              <span class="px-3 py-1 rounded-xl bg-brass text-corten-dark font-serif text-lg sm:text-xl font-black tracking-wider shadow">
+                ${lm.year}
+              </span>
+              <div>
+                <div class="flex items-center gap-2 flex-wrap">
+                  <span class="text-xs font-bold text-brass/80">#${String(lm.order).padStart(2, "0")}</span>
+                  <h3 class="font-serif text-lg sm:text-xl font-bold text-parchment">${lm.name}</h3>
+                </div>
+                <p class="text-xs text-parchment/70">${lm.altName} · 📍 ${lm.location}</p>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-1.5 flex-wrap">
+              ${
+                lm.sameYearGroup
+                  ? `<span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-amber-900/80 text-brass-light border border-brass/40">
+                      ${lm.sameYearGroup}
+                    </span>`
+                  : ""
+              }
+              ${
+                isDual
+                  ? `<span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-brass/25 text-brass-light border border-brass/50">
+                      雙版本並列（2 枚圓徽）
+                    </span>`
+                  : `<span class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-corten-dark/80 text-parchment/80 border border-brass/25">
+                      ${lm.medallions[0].badgeType}
+                    </span>`
+              }
+            </div>
+          </div>
+
+          <!-- 圓徽並列展示區（單版置中／雙版並排） -->
+          <div class="my-5 grid ${isDual ? "grid-cols-1 sm:grid-cols-2 gap-4" : "grid-cols-1"}">
+            ${lm.medallions
+              .map(
+                (m) => `
+                <div onclick="openDetailModal('${m.id}')"
+                  class="cursor-pointer rounded-2xl bg-corten-dark/65 hover:bg-corten-dark/95 border border-brass/25 hover:border-brass p-4 flex flex-col items-center text-center transition group/disc">
+                  <div class="w-32 h-32 sm:w-36 sm:h-36 rounded-full medallion-disc p-2.5 flex items-center justify-center mb-3 group-hover/disc:scale-105 transition-transform">
+                    ${getMedallionSVG(m.svgKey)}
+                  </div>
+                  <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-corten-rust text-brass-light mb-1.5">
+                    ${m.badgeType}
+                  </span>
+                  <p class="text-xs font-bold text-parchment line-clamp-1">${m.subtitle}</p>
+                  <span class="mt-2 text-[11px] text-brass font-semibold group-hover/disc:underline">
+                    點擊檢視設計密碼 →
+                  </span>
+                </div>
+              `
+              )
+              .join("")}
+          </div>
+
+          <!-- 歷史背景簡述與走讀按鈕 -->
+          <div class="pt-3 border-t border-brass/15 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <p class="text-xs sm:text-sm text-parchment/80 leading-relaxed line-clamp-2">
+              ${lm.history}
+            </p>
+            <button onclick="openDetailModal('${lm.medallions[0].id}')"
+              class="shrink-0 self-start sm:self-center px-3.5 py-2 rounded-xl bg-corten-dark/90 hover:bg-brass text-brass-light hover:text-corten-dark border border-brass/40 text-xs font-bold transition">
+              完整故事導覽
+            </button>
+          </div>
+        </article>
+      `;
+    }
+
+    function openDetailModal(medallionId) {
+      const item = ALL_MEDALLIONS_FLAT.find((m) => m.id === medallionId);
+      if (!item) return;
+
+      document.getElementById("modal-year").textContent = item.year;
+      document.getElementById("modal-title").textContent = item.name;
+      document.getElementById("modal-badge-type").textContent = item.badgeType;
+      document.getElementById("modal-subtitle").textContent = item.subtitle;
+      document.getElementById("modal-design-note").textContent = item.designNote;
+      document.getElementById("modal-history").textContent = item.history;
+      document.getElementById("modal-walk-tip").textContent = item.walkTip;
+      document.getElementById("modal-location").textContent = `📍 ${item.location}`;
+      document.getElementById("modal-svg-container").innerHTML = getMedallionSVG(item.svgKey);
+
+      const modal = document.getElementById("detail-modal");
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+    }
+
+    function closeDetailModal() {
+      const modal = document.getElementById("detail-modal");
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+    }
+
+    // =========================================================
+    // 模式二：現場尋寶解謎（依 1908 → 1938 時間軸闖關）
+    // =========================================================
+    function getRankLabel(count) {
+      if (count >= 14) return "首席臺中舊城時光大師 🏆";
+      if (count >= 10) return "資深建築史蹟偵探 🎖️";
+      if (count >= 5) return "進階舊城探索者 🧭";
+      return "見習走讀旅人 🌱";
+    }
+
+    function updateQuestUI() {
+      const count = solvedStages.length;
+      const pct = Math.round((count / QUEST_STAGES.length) * 100);
+      const rank = getRankLabel(count);
+
+      document.getElementById("quest-badge").textContent = `${count}/14`;
+      document.getElementById("quest-solved-count").textContent = count;
+      document.getElementById("quest-progress-bar").style.width = `${pct}%`;
+      document.getElementById("quest-rank-label").textContent = `目前階級：${rank}`;
+      document.getElementById("cert-solved-num").textContent = count;
+      document.getElementById("cert-rank-badge").textContent = `認證階級：${rank}`;
+
+      // 渲染 14 關時間順序印記按鈕
+      const pillsContainer = document.getElementById("quest-stage-pills");
+      pillsContainer.innerHTML = QUEST_STAGES.map((st, idx) => {
+        const isSolved = solvedStages.includes(st.stage);
+        const isCurrent = idx === currentQuestIdx;
+        let cls = "px-2.5 py-1 rounded-lg text-xs font-bold transition border ";
+        if (isCurrent) {
+          cls += "bg-brass text-corten-dark border-brass scale-105 shadow";
+        } else if (isSolved) {
+          cls += "bg-emerald-800/80 text-emerald-100 border-emerald-500/50";
+        } else {
+          cls += "bg-corten-dark/70 text-parchment/75 border-brass/25 hover:border-brass";
+        }
+        return `<button onclick="selectQuestStage(${idx})" class="${cls}">
+          ${isSolved ? "✓ " : ""}#${st.stage} (${isSolved ? st.year : "????"})
+        </button>`;
+      }).join("");
+    }
+
+    function selectQuestStage(idx) {
+      currentQuestIdx = idx;
+      updateQuestUI();
+      renderQuestStage();
+    }
+
+    function renderQuestStage() {
+      const st = QUEST_STAGES[currentQuestIdx];
+      const landmark = LANDMARKS.find((l) => l.id === st.landmarkId);
+      const isSolved = solvedStages.includes(st.stage);
+      const isDual = landmark.medallions.length > 1;
+      const container = document.getElementById("quest-stage-card");
+
+      container.innerHTML = `
+        <!-- 關卡頂部標頭 -->
+        <div class="bg-corten-deep text-parchment px-6 py-4 flex items-center justify-between border-b border-brass/40">
+          <div class="flex items-center gap-2.5">
+            <span class="px-3 py-1 rounded-full bg-brass text-corten-dark font-serif font-black text-xs sm:text-sm">
+              時光節點 ${String(st.stage).padStart(2, "0")} / 14
+            </span>
+            <h3 class="font-serif text-base sm:text-lg font-bold">
+              ${isSolved ? `已解鎖：${st.year} ${st.name}` : "神祕耐候鋼鏤空圓徽"}
+            </h3>
+          </div>
+          <span class="text-xs font-bold px-2.5 py-1 rounded-lg ${isSolved ? "bg-emerald-700 text-white" : "bg-corten-dark text-brass-light"}">
+            ${isSolved ? "★ 已獲得印記" : "🔍 觀察解謎中"}
+          </span>
+        </div>
+
+        <!-- 關卡主體 -->
+        <div class="p-6 sm:p-8 grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+          <!-- 左側：神秘圓徽拓印圖（支援單版與雙版並列） -->
+          <div class="md:col-span-5 flex flex-col items-center">
+            <div class="flex items-center justify-center gap-3 flex-wrap">
+              ${landmark.medallions
+                .map(
+                  (m) => `
+                  <div class="flex flex-col items-center">
+                    <div class="${isDual ? "w-32 h-32 sm:w-36 sm:h-36" : "w-44 h-44 sm:w-52 sm:h-52"} rounded-full medallion-disc p-3 flex items-center justify-center">
+                      ${getMedallionSVG(m.svgKey)}
+                    </div>
+                    ${isDual ? `<span class="mt-1.5 text-[11px] font-bold text-corten-rust">${m.badgeType}</span>` : ""}
+                  </div>
+                `
+                )
+                .join("")}
+            </div>
+            <div class="mt-3 text-center">
+              <span class="inline-block px-3 py-1 rounded-md bg-corten-deep text-brass-light font-serif text-sm tracking-widest">
+                ${isSolved ? `${st.year} · ${st.name}` : "？ ？ ？ ？ · 神祕地標"}
+              </span>
+            </div>
+          </div>
+
+          <!-- 右側：線索與答題區 -->
+          <div class="md:col-span-7 space-y-4">
+            <div class="bg-parchment-dark/80 p-4 rounded-2xl border border-brass/35">
+              <h4 class="font-serif font-bold text-sm text-corten-rust mb-1">🔎 圖徽造型線索：</h4>
+              <p class="text-sm sm:text-base text-parchment-ink leading-relaxed">${st.clue}</p>
+            </div>
+
+            <!-- 錦囊提示折疊區 -->
+            <div>
+              <button onclick="document.getElementById('hint-box-${st.stage}').classList.toggle('hidden')"
+                class="text-xs font-bold text-corten-rust hover:text-corten-deep underline flex items-center gap-1">
+                <span>💡</span><span>需要時間軸與方位錦囊提示？點此展開</span>
+              </button>
+              <p id="hint-box-${st.stage}" class="hidden mt-2 text-xs sm:text-sm bg-amber-100/90 text-parchment-ink p-3 rounded-xl border border-brass/40">
+                ${st.hint}
+              </p>
+            </div>
+
+            ${
+              isSolved
+                ? `
+                <div class="bg-emerald-50 border-2 border-emerald-600/40 rounded-2xl p-4 space-y-3">
+                  <div class="flex items-center gap-2 text-emerald-900 font-bold text-sm">
+                    <span>🎉</span><span>恭喜破解！此地標為【${st.year} ${st.name}】</span>
+                  </div>
+                  <p class="text-xs sm:text-sm text-emerald-950/85 leading-relaxed">
+                    ${landmark.history}
+                  </p>
+                  <div class="flex flex-wrap gap-2 pt-1">
+                    <button onclick="openDetailModal('${landmark.medallions[0].id}')"
+                      class="px-4 py-2 rounded-xl bg-corten-deep text-parchment text-xs font-bold hover:bg-corten-rust transition">
+                      📖 閱讀完整設計密碼
+                    </button>
+                    ${
+                      currentQuestIdx < QUEST_STAGES.length - 1
+                        ? `<button onclick="selectQuestStage(${currentQuestIdx + 1})"
+                            class="px-4 py-2 rounded-xl bg-brass text-corten-dark text-xs font-bold hover:bg-brass-light transition">
+                            前往下一個年份（${QUEST_STAGES[currentQuestIdx + 1].year}）→
+                          </button>`
+                        : `<button onclick="openCertificateModal()"
+                            class="px-4 py-2 rounded-xl bg-brass text-corten-dark text-xs font-bold pulse-brass">
+                            🏅 領取全通關偵探證書
+                          </button>`
+                    }
+                  </div>
+                </div>
+                `
+                : `
+                <!-- 雙重解鎖驗證：輸入 4 位數年份 或 選擇地標名稱 -->
+                <div class="space-y-3 pt-1">
+                  <div>
+                    <label class="block text-xs font-bold text-corten-deep mb-1.5">
+                      方式 A｜請輸入此地標的「4 位數建造西元年份」：
+                    </label>
+                    <div class="flex gap-2">
+                      <input id="year-answer-input" type="text" inputmode="numeric" maxlength="4" placeholder="例如：1908"
+                        onkeydown="if(event.key==='Enter') checkYearAnswer()"
+                        class="w-36 px-4 py-2.5 rounded-xl bg-white border-2 border-brass/50 font-serif text-lg font-bold text-center tracking-widest focus:outline-none focus:border-corten-rust" />
+                      <button onclick="checkYearAnswer()"
+                        class="px-5 py-2.5 rounded-xl bg-corten-deep text-parchment text-sm font-bold hover:bg-corten-rust transition shadow">
+                        驗證年份解鎖
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="pt-2 border-t border-brass/25">
+                    <p class="text-xs font-bold text-corten-deep mb-2">
+                      方式 B｜線上體驗／直接辨識地標名稱解鎖：
+                    </p>
+                    <div class="grid grid-cols-2 gap-2">
+                      ${st.options
+                        .map(
+                          (opt) => `
+                        <button onclick="checkNameAnswer('${opt}')"
+                          class="px-3 py-2.5 rounded-xl bg-white hover:bg-brass/25 border border-brass/40 text-xs sm:text-sm font-bold text-parchment-ink transition text-left flex items-center justify-between">
+                          <span>${opt}</span>
+                          <span class="text-brass-dark">→</span>
+                        </button>`
+                        )
+                        .join("")}
+                    </div>
+                  </div>
+                </div>
+                `
+            }
+          </div>
+        </div>
+      `;
+    }
+
+    function markStageSolved(stageNum) {
+      if (!solvedStages.includes(stageNum)) {
+        solvedStages.push(stageNum);
+        localStorage.setItem("tc_timewall_solved_v2", JSON.stringify(solvedStages));
+      }
+      updateQuestUI();
+      renderQuestStage();
+
+      if (solvedStages.length === QUEST_STAGES.length) {
+        showToast("太厲害了！1908–1938 共 14 處舊城地標全數破解！", "🏆");
+        setTimeout(() => openCertificateModal(), 900);
+      } else {
+        showToast(`成功解鎖第 ${stageNum} 關時光印記！`, "🎉");
+      }
+    }
+
+    function checkYearAnswer() {
+      const st = QUEST_STAGES[currentQuestIdx];
+      const val = (document.getElementById("year-answer-input")?.value || "").trim();
+      if (!val) {
+        showToast("請先輸入 4 位數建造年份喔！", "💡");
+        return;
+      }
+      if (val === st.year) {
+        markStageSolved(st.stage);
+      } else {
+        showToast(`年份「${val}」不正確，提示：關卡是依 1908 → 1938 時間先後排列的喔！`, "🤔");
+      }
+    }
+
+    function checkNameAnswer(selectedName) {
+      const st = QUEST_STAGES[currentQuestIdx];
+      if (selectedName === st.name) {
+        markStageSolved(st.stage);
+      } else {
+        showToast(`不是「${selectedName}」喔，觀察一下圖徽的建築輪廓或符號！`, "🔍");
+      }
+    }
+
+    function resetQuestConfirm() {
+      solvedStages = [];
+      localStorage.removeItem("tc_timewall_solved_v2");
+      currentQuestIdx = 0;
+      updateQuestUI();
+      renderQuestStage();
+      showToast("已重置所有尋寶解謎進度", "🔄");
+    }
+
+    function openCertificateModal() {
+      updateQuestUI();
+      const modal = document.getElementById("cert-modal");
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+    }
+
+    function closeCertificateModal() {
+      const modal = document.getElementById("cert-modal");
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+    }
+
+    function saveDetectiveName(val) {
+      detectiveName = val;
+      localStorage.setItem("tc_timewall_name", val);
+    }
+
+    function copyShareResult() {
+      const name = detectiveName.trim() || "舊城走讀旅人";
+      const count = solvedStages.length;
+      const rank = getRankLabel(count);
+      const text = `🏛️【臺中舊城時光壁 1908–1938】\n探險者「${name}」已完成 ${count}/14 處歷史地標鏤空圖徽時間軸解謎！\n獲得稱號：${rank}\n一起來探索臺中舊城建築密碼吧！`;
+
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        document.execCommand("copy");
+        showToast("已複製通關戰績！可直接貼上分享給朋友", "📋");
+      } catch (e) {
+        showToast("複製失敗，請直接截圖保存證書", "⚠️");
+      }
+      document.body.removeChild(textarea);
+    }
+
+    // =========================================================
+    // 模式三：圖徽辨識快問快答（按 1908 → 1938 時間軸排序出題）
+    // =========================================================
+    function shuffleArray(arr) {
+      const copy = [...arr];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    function initQuiz() {
+      // 從 17 組圓徽中隨機抽取 10 題，並依建造年份 1908 → 1938 排序
+      const pool = shuffleArray(ALL_MEDALLIONS_FLAT)
+        .slice(0, 10)
+        .sort((a, b) => Number(a.year) - Number(b.year));
+
+      quizQuestions = pool.map((target) => {
+        const distractors = shuffleArray(
+          ALL_MEDALLIONS_FLAT.filter((m) => m.baseName !== target.baseName)
+        )
+          .slice(0, 3)
+          .map((d) => ({ label: `${d.year}｜${d.baseName}`, isCorrect: false }));
+
+        const options = shuffleArray([
+          { label: `${target.year}｜${target.baseName}`, isCorrect: true },
+          ...distractors
+        ]);
+
+        return {
+          target,
+          options
+        };
+      });
+
+      quizIndex = 0;
+      quizScore = 0;
+      quizAnswered = false;
+      document.getElementById("quiz-score").textContent = "0";
+      renderQuizQuestion();
+    }
+
+    function renderQuizQuestion() {
+      const body = document.getElementById("quiz-body");
+
+      if (quizIndex >= quizQuestions.length) {
+        let title = "舊城時光博士 🎓";
+        let comment = "太驚人了！你對臺中舊城區 1908–1938 年間的建築與徽章瞭若指掌！";
+        if (quizScore < 50) {
+          title = "舊城見習生 🌱";
+          comment = "建議先到「時光圖鑑」沿著時間軸逛逛每一枚圓徽的設計密碼，再來挑戰滿分！";
+        } else if (quizScore < 80) {
+          title = "舊城文化達人 🏛️";
+          comment = "表現相當出色！已經能辨認出絕大多數的歷史地標圓徽了！";
+        }
+
+        body.innerHTML = `
+          <div class="text-center py-6 space-y-5">
+            <div class="text-5xl">🏆</div>
+            <div>
+              <p class="text-xs font-bold uppercase tracking-widest text-corten-rust">挑戰結果出爐</p>
+              <h3 class="font-serif text-2xl sm:text-3xl font-black text-corten-deep mt-1">${title}</h3>
+            </div>
+            <div class="inline-block px-8 py-4 rounded-2xl bg-parchment-dark border border-brass/40">
+              <span class="text-xs text-parchment-ink/70 block">最終總分</span>
+              <span class="font-serif text-4xl font-black text-corten-rust">${quizScore}</span>
+              <span class="text-sm text-parchment-ink/70"> / 100 分</span>
+            </div>
+            <p class="text-sm text-parchment-ink/85 max-w-md mx-auto leading-relaxed">${comment}</p>
+            <div class="pt-2 flex flex-wrap justify-center gap-3">
+              <button onclick="initQuiz()"
+                class="px-6 py-3 rounded-xl bg-corten-deep text-parchment text-sm font-bold hover:bg-corten-rust transition shadow">
+                🔄 再玩一局（依時間軸重新抽題）
+              </button>
+              <button onclick="switchMode('gallery')"
+                class="px-6 py-3 rounded-xl bg-brass text-corten-dark text-sm font-bold hover:bg-brass-light transition">
+                📖 前往時光圖鑑複習
+              </button>
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      const q = quizQuestions[quizIndex];
+      quizAnswered = false;
+
+      body.innerHTML = `
+        <div class="flex items-center justify-between text-xs font-bold text-corten-rust mb-4">
+          <span>第 ${quizIndex + 1} 題 / 共 10 題（依時間演進排序）</span>
+          <span>類型：${q.target.badgeType}</span>
+        </div>
+
+        <div class="flex flex-col items-center mb-6">
+          <div class="w-40 h-40 sm:w-44 sm:h-44 rounded-full medallion-disc p-3 flex items-center justify-center mb-3">
+            ${getMedallionSVG(q.target.svgKey)}
+          </div>
+          <p class="font-serif text-base sm:text-lg font-bold text-center text-corten-deep">
+            請問這枚鏤空圓徽代表哪一座臺中歷史地標？
+          </p>
+        </div>
+
+        <div id="quiz-options" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          ${q.options
+            .map(
+              (opt, idx) => `
+            <button onclick="submitQuizAnswer(${idx})" id="qopt-${idx}"
+              class="p-3.5 rounded-2xl bg-parchment-dark/80 hover:bg-brass/30 border-2 border-brass/35 text-left font-serif font-bold text-sm sm:text-base text-parchment-ink transition flex items-center justify-between">
+              <span>${opt.label}</span>
+              <span class="text-xs text-corten-rust opacity-70">選擇</span>
+            </button>`
+            )
+            .join("")}
+        </div>
+
+        <div id="quiz-feedback" class="hidden mt-5 p-4 rounded-2xl bg-amber-50 border border-brass/50 space-y-2">
+          <p id="quiz-feedback-title" class="font-bold text-sm"></p>
+          <p class="text-xs text-parchment-ink/85 leading-relaxed">${q.target.designNote}</p>
+          <div class="pt-1 text-right">
+            <button onclick="nextQuizQuestion()"
+              class="px-5 py-2 rounded-xl bg-corten-deep text-parchment text-xs font-bold hover:bg-corten-rust transition">
+              ${quizIndex < 9 ? "下一題 →" : "查看總成績 →"}
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    function submitQuizAnswer(selectedIdx) {
+      if (quizAnswered) return;
+      quizAnswered = true;
+
+      const q = quizQuestions[quizIndex];
+      const chosen = q.options[selectedIdx];
+      const feedbackBox = document.getElementById("quiz-feedback");
+      const feedbackTitle = document.getElementById("quiz-feedback-title");
+
+      q.options.forEach((opt, idx) => {
+        const btn = document.getElementById(`qopt-${idx}`);
+        btn.disabled = true;
+        if (opt.isCorrect) {
+          btn.className = "p-3.5 rounded-2xl bg-emerald-700 text-white border-2 border-emerald-500 text-left font-serif font-bold text-sm sm:text-base flex items-center justify-between shadow";
+          btn.lastElementChild.textContent = "✓ 正確答案";
+          btn.lastElementChild.className = "text-xs text-emerald-100";
+        } else if (idx === selectedIdx && !opt.isCorrect) {
+          btn.className = "p-3.5 rounded-2xl bg-rose-800 text-white border-2 border-rose-600 text-left font-serif font-bold text-sm sm:text-base flex items-center justify-between";
+          btn.lastElementChild.textContent = "✕ 答錯了";
+          btn.lastElementChild.className = "text-xs text-rose-100";
+        } else {
+          btn.classList.add("opacity-50");
+        }
+      });
+
+      if (chosen.isCorrect) {
+        quizScore += 10;
+        document.getElementById("quiz-score").textContent = quizScore;
+        feedbackTitle.textContent = `⭕ 答對了！正是【${q.target.year} ${q.target.baseName}】`;
+        feedbackTitle.className = "font-bold text-sm text-emerald-800";
+      } else {
+        feedbackTitle.textContent = `❌ 差一點！正確答案是【${q.target.year} ${q.target.baseName}】`;
+        feedbackTitle.className = "font-bold text-sm text-rose-800";
+      }
+
+      feedbackBox.classList.remove("hidden");
+    }
+
+    function nextQuizQuestion() {
+      quizIndex++;
+      renderQuizQuestion();
+    }
+  </script>
+</body>
+</html>
